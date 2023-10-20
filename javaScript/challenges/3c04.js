@@ -20,14 +20,25 @@ function calcTip(bills){
 }
 
 //Calculating the average of all the bills (tips included).
-function calcAverage(arr) {
+// function calcAverage(arr) {
+//     let sum = 0;
+//     for (let i = 0; i < arr.length; i++){
+//         sum += arr[i];
+//     }
+//     let average = sum / arr.length;
+
+//     return average;
+// }
+
+//Using a function expression to calculate the average of all the bills (tips included).
+const calcAverage = function(arr){
     let sum = 0;
-    for (let i = 0; i < arr.length; i++){
+    for (i = 0; i < arr.length; i++){
         sum += arr[i];
     }
-    let average = sum / arr.length;
+    const average = sum / arr.length;
 
-    return average;
+    console.log(`Average of the tips: ${average}`);
 }
 
 
