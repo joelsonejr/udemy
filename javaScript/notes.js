@@ -645,7 +645,7 @@ console.log(itadori);
 for (let repetition = 1; repetition <= 10; repetition++) {
   console.log(`Lifting weights repetition ${repetition} 🏋`);
 }
-*/
+
 
 // 3.47 - Looping Arrays, breaking and cotinuing
 
@@ -706,3 +706,32 @@ for (let i = 0; i < kugisaki.length; i++) {
   if (typeof kugisaki[i] === 'number') break;
     console.log(kugisaki[i]);
 }
+
+*/
+
+// 3.48 - Looping backwards, and Loops in Loops
+
+'use strict';
+
+const kugisaki = [
+  'Nobara',
+  'Kugisaki',
+  2023 - 2002,
+  'Jujutsu Shi', 
+  ['Itadori', 'Fushiguro','Maki', 'Panda', 'Inumaki', ]
+];
+
+
+for (let i = kugisaki.length - 1; i >= 0; i-- ){
+  console.log(kugisaki[i]);
+}
+
+let exercise = ['Lifting weights', 'LegPress', 'Bench Press'];
+
+for (let series = 1; series <= 3; series++){
+  console.log(`---Starting exercise ${series}`);
+  for(let repetition = 1; repetition <=5; repetition++){
+    console.log(`${exercise[series - 1]} repetition ${repetition}`);
+  }
+}
+
