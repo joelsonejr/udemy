@@ -27,7 +27,7 @@ function calcAverage(arr) {
     }
     let average = sum / arr.length;
 
-    console.log(`Average = ${average}`);
+    return average;
 }
 
 
