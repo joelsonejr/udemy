@@ -39,6 +39,8 @@ const calcAverage = function(arr){
     const average = sum / arr.length;
 
     console.log(`Average of the tips: ${average}`);
+    
+    return(average);
 }
 
 
