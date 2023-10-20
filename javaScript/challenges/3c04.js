@@ -5,21 +5,33 @@ const tips = [];
 const totals = [];
 
 //Calculating the tip value
-function calcTip(billValue){
-    let tip =  billValue * 0.2;
+function calcTip(bills){
+    for (let bill = 0; bill < bills.length; bill++) {
+        let billValue = bills[bill];
+        let tip =  billValue * 0.2;
 
-    if (billValue >= 50 && billValue <= 300) {
-        tip = billValue * 0.15;
-    } 
-    return tip;
+        if (billValue >= 50 && billValue <= 300) {
+            tip = billValue * 0.15;
+        } 
+        
+        tips.push(tip);
+        totals.push(billValue + tip);
+    }
+}
+
+//Calculating the average of all the bills (tips included).
+function calcAverage(arr) {
+    let sum = 0;
+    for (let i = 0; i < arr.length; i++){
+        sum += arr[i];
+    }
+    let average = sum / arr.length;
+
+    console.log(`Average = ${average}`);
 }
 
 
-//  TODO: Modificar o argumento da função para um array, e fazer a iteração do 
-// mesmo.
+calcTip(bills);
+calcAverage(totals);
 
-/*
-Use the calcTip function we wrote before (included in the starter code) to
-calculate tips and total values (bill + tip) for every bill value in the bills 
-array. Use a for loop to perform the 10 calculations!
-*/
+
