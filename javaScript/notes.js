@@ -31,6 +31,8 @@ SECTION 03
     3.42 Introduction to Objects
     3.43 Dot vs Bracket Notation
     3.44 Object Methods
+    3.46 - Iteration: the For loop
+    3.47 - Looping Arrays, breaking and cotinuing
 */
 
 /*
@@ -734,4 +736,3 @@ for (let series = 1; series <= 3; series++){
     console.log(`${exercise[series - 1]} repetition ${repetition}`);
   }
 }
-
