@@ -7,9 +7,9 @@ const totals = [];
 //Calculating the tip value
 function calcTip(bills){
     for (let bill = 0; bill < bills.length; bill++) {
-        let billValue = bills[bill];
+        const billValue = bills[bill];
 
-        let tip = billValue >= 50 && billValue <= 300 ? billValue * 0.15 : billValue * 0.2
+        const tip = billValue >= 50 && billValue <= 300 ? billValue * 0.15 : billValue * 0.2
         
         tips.push(tip);
         totals.push(billValue + tip);
