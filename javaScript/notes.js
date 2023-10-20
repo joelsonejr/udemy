@@ -639,7 +639,7 @@ console.log(itadori['calcAge'](1997));
 console.log(itadori.getSummary());
 console.log(itadori);
 
-
+------------------------------------------------------------------------------
 
 // 3.46 - Iteration: the For loop
 'use strict'
@@ -648,6 +648,7 @@ for (let repetition = 1; repetition <= 10; repetition++) {
   console.log(`Lifting weights repetition ${repetition} 🏋`);
 }
 
+-------------------------------------------------------------------------------------
 
 // 3.47 - Looping Arrays, breaking and cotinuing
 
@@ -709,7 +710,7 @@ for (let i = 0; i < kugisaki.length; i++) {
     console.log(kugisaki[i]);
 }
 
-*/
+-----------------------------------------------------------------------------
 
 // 3.48 - Looping backwards, and Loops in Loops
 
@@ -736,3 +737,28 @@ for (let series = 1; series <= 3; series++){
     console.log(`${exercise[series - 1]} repetition ${repetition}`);
   }
 }
+
+*/
+
+// 3.49 The While Loop
+
+for (let rep = 1; rep <= 10; rep++){
+  console.log(`Lifting weigths repetition ${rep}`);
+}
+
+let rep = 1;
+while (rep <= 10){
+  console.log(`Lifting weigths repetition ${rep}`);
+
+  rep++;
+}
+
+let dice = Math.trunc(Math.random() * 6) + 1;
+let diceRolls = 0;
+while (dice != 6) {
+  console.log(dice);
+  dice = Math.trunc(Math.random() * 6) + 1;
+  diceRolls++
+}
+console.log(`You rolled the dice ${diceRolls} times.`)
+
