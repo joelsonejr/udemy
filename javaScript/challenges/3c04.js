@@ -33,7 +33,7 @@ function calcTip(bills){
 //Using a function expression to calculate the average of all the bills (tips included).
 const calcAverage = function(arr){
     let sum = 0;
-    for (i = 0; i < arr.length; i++){
+    for (let i = 0; i < arr.length; i++){
         sum += arr[i];
     }
     const average = sum / arr.length;
