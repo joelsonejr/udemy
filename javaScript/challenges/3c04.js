@@ -8,15 +8,15 @@ const totals = [];
 function calcTip(bills){
     for (let bill = 0; bill < bills.length; bill++) {
         let billValue = bills[bill];
-        let tip =  billValue * 0.2;
 
-        if (billValue >= 50 && billValue <= 300) {
-            tip = billValue * 0.15;
-        } 
+        let tip = billValue >= 50 && billValue <= 300 ? billValue * 0.15 : billValue * 0.2
         
         tips.push(tip);
         totals.push(billValue + tip);
     }
+    console.log(`Bills: ${bills}`);
+    console.log(`Tips: ${tips}`);
+    console.log(`Totals: ${totals}`);
 }
 
 //Calculating the average of all the bills (tips included).
