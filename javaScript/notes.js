@@ -33,6 +33,8 @@ SECTION 03
     3.44 Object Methods
     3.46 - Iteration: the For loop
     3.47 - Looping Arrays, breaking and cotinuing
+    3.48 - Looping backwards, and Loops in Loops
+    3.49 The While Loop
 */
 
 /*
@@ -738,7 +740,7 @@ for (let series = 1; series <= 3; series++){
   }
 }
 
-*/
+
 
 // 3.49 The While Loop
 
@@ -762,3 +764,4 @@ while (dice != 6) {
 }
 console.log(`You rolled the dice ${diceRolls} times.`)
 
+*/
