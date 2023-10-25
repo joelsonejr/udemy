@@ -46,7 +46,3 @@ const calcAverage = function (arr) {
 
 calcTip(bills);
 calcAverage(totals);
-
-//  BUG
-// TODO
-// FIXME
