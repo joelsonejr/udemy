@@ -765,3 +765,82 @@ while (dice != 6) {
 console.log(`You rolled the dice ${diceRolls} times.`)
 
 */
+
+// 5.59 - Using Google. StackOverflow and MDN
+
+'use strict';
+
+const temperatures = [3, -2, -6, -1, 'error', 9, 13, 17, 15, 14, 9, 5];
+
+/*
+ 1) Understanding the problem:
+  - What is temperatur amplitude? Is the difference between highest and lowest temp.
+  - How to compute max and min temperatures?
+  - What's a sensor error? And what to do?
+
+2) Breaking up into sub-problems
+  - How to ignore errors?
+  - Find max value in temp array
+  - Find min value in temp array
+  - Subtract min from max (amplitude) and return it
+ */
+
+const calcTempAmplitude = function (temps) {
+  let maxTemp = temps[0];
+  let minTemp = temps[0];
+
+  for (let i = 0; i < temps.length; i++) {
+    const currentTemp = temps[i];
+
+    if (typeof currentTemp !== 'number') continue;
+
+    if (currentTemp > maxTemp) {
+      maxTemp = currentTemp;
+    }
+    if (currentTemp < minTemp) {
+      minTemp = currentTemp;
+    }
+  }
+  console.log(maxTemp, minTemp);
+  return maxTemp - minTemp;
+};
+
+const tempAmplitude = calcTempAmplitude(temperatures);
+console.log(`The temperature amplitude is ${tempAmplitude} degrees`);
+
+/*
+PROBLEM 2:
+- Function should receive 2 arrays of temps.
+
+1) Understanding the problem
+  - With 2 arrays, shoud we implement the functionality twice? NO! Just merge two arrays
+
+2) Breaking up into sub-problems
+  - How to merge 2 arrays?
+*/
+
+const calcTempAmplitudeNew = function (temps01, temps02) {
+  const temps = temps01.concat(temps02);
+  console.log(`temps ${temps}`);
+
+  let maxTemp = temps[0];
+  let minTemp = temps[0];
+
+  for (let i = 0; i < temps.length; i++) {
+    const currentTemp = temps[i];
+
+    if (typeof currentTemp !== 'number') continue;
+
+    if (currentTemp > maxTemp) {
+      maxTemp = currentTemp;
+    }
+    if (currentTemp < minTemp) {
+      minTemp = currentTemp;
+    }
+  }
+  console.log(maxTemp, minTemp);
+  return maxTemp - minTemp;
+};
+
+const tempAmplitudeNew = calcTempAmplitudeNew([2, 3, 5], [7, 50, 17]);
+console.log(`The second temperature amplitude is ${tempAmplitudeNew} degrees`);
