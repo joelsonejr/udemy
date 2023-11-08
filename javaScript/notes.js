@@ -764,7 +764,7 @@ while (dice != 6) {
 }
 console.log(`You rolled the dice ${diceRolls} times.`)
 
-*/
+
 
 // 5.59 - Using Google. StackOverflow and MDN
 
@@ -772,7 +772,7 @@ console.log(`You rolled the dice ${diceRolls} times.`)
 
 const temperatures = [3, -2, -6, -1, 'error', 9, 13, 17, 15, 14, 9, 5];
 
-/*
+
  1) Understanding the problem:
   - What is temperatur amplitude? Is the difference between highest and lowest temp.
   - How to compute max and min temperatures?
@@ -783,7 +783,7 @@ const temperatures = [3, -2, -6, -1, 'error', 9, 13, 17, 15, 14, 9, 5];
   - Find max value in temp array
   - Find min value in temp array
   - Subtract min from max (amplitude) and return it
- */
+
 
 const calcTempAmplitude = function (temps) {
   let maxTemp = temps[0];
@@ -808,7 +808,7 @@ const calcTempAmplitude = function (temps) {
 const tempAmplitude = calcTempAmplitude(temperatures);
 console.log(`The temperature amplitude is ${tempAmplitude} degrees`);
 
-/*
+
 PROBLEM 2:
 - Function should receive 2 arrays of temps.
 
@@ -817,7 +817,7 @@ PROBLEM 2:
 
 2) Breaking up into sub-problems
   - How to merge 2 arrays?
-*/
+
 
 const calcTempAmplitudeNew = function (temps01, temps02) {
   const temps = temps01.concat(temps02);
@@ -844,3 +844,63 @@ const calcTempAmplitudeNew = function (temps01, temps02) {
 
 const tempAmplitudeNew = calcTempAmplitudeNew([2, 3, 5], [7, 50, 17]);
 console.log(`The second temperature amplitude is ${tempAmplitudeNew} degrees`);
+
+
+// 5.61 Debbuging (fixing errors)
+
+const measureKelvin = function () {
+  const measurement = {
+    type: 'temp',
+    unit: 'celsius',
+
+    //Fix the bug
+    // value: Number(prompt('Degrees in celsius:')),
+    value: 10,
+  };
+
+  // B) Find the Bug
+  console.log(measurement);
+  console.table(measurement);
+
+  // console.log(measurement.value);
+  // console.warn(measurement.value);
+  // console.error(measurement.value);
+
+  const kelvin = measurement.value + 273;
+  return kelvin;
+};
+
+//A) Identify the bug
+console.log(measureKelvin());
+
+const calcTempAmplitudeBug = function (temps01, temps02) {
+  const temps = temps01.concat(temps02);
+  console.log(`temps ${temps}`);
+
+  let maxTemp = temps[0];
+  let minTemp = 0;
+
+  for (let i = 0; i < temps.length; i++) {
+    const currentTemp = temps[i];
+
+    // debugger; //abre o debugger do navegador, na linha em que foi inserido.
+
+    if (typeof currentTemp !== 'number') continue;
+
+    if (currentTemp > maxTemp) {
+      maxTemp = currentTemp;
+    }
+    if (currentTemp < minTemp) {
+      minTemp = currentTemp;
+    }
+  }
+  console.log(maxTemp, minTemp);
+  return maxTemp - minTemp;
+};
+
+const amplitudeBug = calcTempAmplitudeBug([3, 5, 1], [9, 4, 5]);
+
+//IDENFITY
+console.log(amplitudeBug);
+
+*/
