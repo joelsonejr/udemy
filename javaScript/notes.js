@@ -35,6 +35,18 @@ SECTION 03
     3.47 - Looping Arrays, breaking and cotinuing
     3.48 - Looping backwards, and Loops in Loops
     3.49 The While Loop
+
+SECTION 04
+ - Navigate this course
+
+SECTION 05 
+  -  Developer Skills & Editor Setup
+
+SECTION 06  
+  - HTML & CSS Crash Couse. See specific folder. 
+
+SECTION 07
+  7.70 - Project #1: Guesse My Number
 */
 
 /*
@@ -902,5 +914,12 @@ const amplitudeBug = calcTempAmplitudeBug([3, 5, 1], [9, 4, 5]);
 
 //IDENFITY
 console.log(amplitudeBug);
+
+
+=============================================================================================
+                                        SECTION 07
+=============================================================================================
+
+7.70 - Project #1: Guess My Number!
 
 */
