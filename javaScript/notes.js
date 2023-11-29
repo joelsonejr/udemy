@@ -921,5 +921,6 @@ console.log(amplitudeBug);
 =============================================================================================
 
 7.70 - Project #1: Guess My Number!
+7.79 - Project #2: Modal Window
 
 */
