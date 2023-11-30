@@ -10,7 +10,7 @@ const openModal = function () {
   overlay.classList.remove('hidden');
 };
 
-const hideModal = function () {
+const closeModal = function () {
   modal.classList.add('hidden');
   overlay.classList.add('hidden');
 };
@@ -19,6 +19,16 @@ for (let i = 0; i < btnsOpenModal.length; i++) {
   btnsOpenModal[i].addEventListener('click', openModal);
 }
 
-btnCloseModal.addEventListener('click', hideModal);
+btnCloseModal.addEventListener('click', closeModal);
 
-overlay.addEventListener('click', hideModal);
+overlay.addEventListener('click', closeModal);
+
+document.addEventListener('keydown', function (event) {
+  let pressedKey = event.key;
+
+  const modalState = !modal.classList.contains('hidden');
+
+  if (pressedKey === 'Escape' && modalState) {
+    closeModal();
+  }
+});

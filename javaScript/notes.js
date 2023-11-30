@@ -949,6 +949,22 @@ methods used to manipulate the class of a object.
 
 ----------------------------------------------------------------------------------------
 
-7.
+7.81 - Handling an "Esc" Keypress Event
+
+document.addEventListener('keydown', function(event){}
+
+document: the document model
+addEventListener: the same listener as before
+
+keydow: There are 3 types os key events: keydown (when a key is pressed), 
+keyup (when a key is released) and keypress (the key was pressed, and is 
+still being pressed).
+
+event: when the eventListener is triggered, it creates an object, containing
+information about the event. By accessing that object it's possible to 
+know, for example, wich key was pressed. 
+Here "event" was used for the name of the parameter, but it could have been
+any name.
+
 
 */
