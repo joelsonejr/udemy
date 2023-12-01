@@ -35,6 +35,18 @@ SECTION 03
     3.47 - Looping Arrays, breaking and cotinuing
     3.48 - Looping backwards, and Loops in Loops
     3.49 The While Loop
+
+SECTION 04
+ - Navigate this course
+
+SECTION 05 
+  -  Developer Skills & Editor Setup
+
+SECTION 06  
+  - HTML & CSS Crash Couse. See specific folder. 
+
+SECTION 07
+  7.70 - Project #1: Guesse My Number
 */
 
 /*
@@ -902,5 +914,57 @@ const amplitudeBug = calcTempAmplitudeBug([3, 5, 1], [9, 4, 5]);
 
 //IDENFITY
 console.log(amplitudeBug);
+
+
+=============================================================================================
+                                        SECTION 07
+=============================================================================================
+
+7.70 - Project #1: Guess My Number!
+
+document.querySelector('.check').addEventListener('click', function () {});
+
+document: the web page
+querySelector: selects classe and ids within the document
+addEventListener: waits for an specified event to occurr, and the executes the 
+predefined action. Above it executes a function.
+
+--------------------------------------------------------------------------------------------
+
+7.79 - Project #2: Modal Window
+
+const btnsOpenModal = document.querySelectorAll('.show-modal');
+
+btnsOpenModal: it's receiveing an object from the document model.
+querrySelectorAll: is selecting all the objects that have the specified class/ id\
+
+btnsOpenModal[i].addEventListener('click', openModal)
+- Another exemple of a listener. Here the action is to execute the function 'openModal'.
+Notice that it wasn't necessary to cast the function using the '()'. 
+
+modal.classList.remove('hidden');
+modal.classList.add('hidden');
+- Removing/ adding a class to a specified object. In the 'classList'the are other 
+methods used to manipulate the class of a object.
+
+----------------------------------------------------------------------------------------
+
+7.81 - Handling an "Esc" Keypress Event
+
+document.addEventListener('keydown', function(event){}
+
+document: the document model
+addEventListener: the same listener as before
+
+keydow: There are 3 types os key events: keydown (when a key is pressed), 
+keyup (when a key is released) and keypress (the key was pressed, and is 
+still being pressed).
+
+event: when the eventListener is triggered, it creates an object, containing
+information about the event. By accessing that object it's possible to 
+know, for example, wich key was pressed. 
+Here "event" was used for the name of the parameter, but it could have been
+any name.
+
 
 */
