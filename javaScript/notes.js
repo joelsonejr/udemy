@@ -47,6 +47,8 @@ SECTION 06
 
 SECTION 07
   7.70 - Project #1: Guesse My Number
+  7.79 - Project #2: Modal Window
+  7.81 - Handling an "Esc" Keypress Event
 */
 
 /*
