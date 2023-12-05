@@ -49,6 +49,10 @@ SECTION 07
   7.70 - Project #1: Guesse My Number
   7.79 - Project #2: Modal Window
   7.81 - Handling an "Esc" Keypress Event
+
+SECTION 08
+  8.93 - Scoping in Practice.
+  8.95 - Hoisting and TDZ in Practice.
 */
 
 /*
