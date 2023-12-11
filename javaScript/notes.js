@@ -53,6 +53,9 @@ SECTION 07
 SECTION 08
   8.93 - Scoping in Practice.
   8.95 - Hoisting and TDZ in Practice.
+  8.97 - This Keywork in Practice.
+  8.98 - Regular Functions vs Arrow Functions
+  8.99 - Primitives vs Objects (Primitive vs Referente Types)
 */
 
 /*
@@ -953,7 +956,7 @@ modal.classList.add('hidden');
 - Removing/ adding a class to a specified object. In the 'classList'the are other 
 methods used to manipulate the class of a object.
 
-----------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 7.81 - Handling an "Esc" Keypress Event
 
@@ -972,5 +975,250 @@ know, for example, wich key was pressed.
 Here "event" was used for the name of the parameter, but it could have been
 any name.
 
+--------------------------------------------------------------------------------
+
+// 8.93 Scoping
+
+'use strict';
+
+function calcAge(birthYear) {
+  const age = 2023 - birthYear;
+  function printAge() {
+    let output = `${firstName}, you are ${age}, born in ${birthYear}`;
+    console.log(output);
+
+    if (birthYear >= 1982 && birthYear <= 1996) {
+      var millenial = true;
+      // Creating NEW variable with same name as outer scope's variable.
+      const firstName = 'Joelson';
+
+      //Reassigning outer scope's variable
+      output = `NEW OUTPUT`;
+      const str = `Oh, and you're a millenial, ${firstName}`;
+      console.log(str);
+
+      function add(a, b) {
+        return a + b;
+      }
+    }
+    console.log(millenial);
+  }
+  printAge();
+  return age;
+}
+
+-------------------------------------------------------------------------------
+
+// 8.97 - This Keywork in Practice.
+
+'use strict'
+
+const firstName = 'Joe';
+calcAge(1982);
+
+console.log(this);
+
+//Regular functions receive their own values for "this"
+const calcAge = function (birthYear) {
+  console.log(2037 - birthYear);
+  console.log(this);
+};
+
+calcAge(1982);
+
+//arrow function don't receive a "this" keyword. What happens it that
+// it receives the "this value" from the parent scope.
+const calcAgeArrow = birthYear => {
+  console.log(2037 - birthYear);
+  console.log(this);
+};
+
+calcAgeArrow(1982);
+
+//this referencing to the object who called the method.
+const joe = {
+  year: 1982,
+  calcAge: function () {
+    console.log(this);
+    console.log(2023 - this.year);
+  },
+};
+
+//Here, the objetc joe is calling the method calcAge. That's why
+//"this" is pointing to "joe".
+joe.calcAge();
+
+const raquel = {
+  year: 1987,
+};
+
+raquel.calcAge = joe.calcAge;
+
+raquel.calcAge();
+
+const testFunction = raquel.calcAge;
+testFunction();
+
+-------------------------------------------------------------------------------
+
+// 8.98 - Regular Functions and Arrow Functions
+var firstName = 'Sheila';
+
+const joe = {
+  firstName: 'Joe',
+  year: 1982,
+  calcAge: function () {
+    console.log(this);
+    console.log(2023 - this.year);
+
+    //Solution 1
+    // const self = this; // self or that
+    // const isMillenial = function () {
+    //   console.log(self.year >= 1981 && self.year <= 1996);
+    // };
+
+    // Solution 2
+    //The arrow function uses the 'this' keyword from its parent scope. In
+    // this case in the parent scope the this keyword is 'joe'.
+    const isMillenial = () => {
+      console.log(this.year >= 1981 && this.year <= 1996);
+    };
+
+    isMillenial();
+  },
+
+  greet: () => console.log(`Hey ${this.firstName}`),
+};
+
+joe.greet();
+joe.calcAge();
+
+//Arguments Keyword
+const addExpr = function (a, b) {
+  console.log(arguments);
+  return a + b;
+};
+
+addExpr(3, 2);
+addExpr(1, 1, 2, 3, 5);
+
+
+---------------------------------------------------------------------------
+
+//8.99 - Primitives vs Objects (Primitive vs Referente Types)
+
+/*
+Primitives (Primitive Types)
+ Number
+ String
+ Boolean
+ Undefined
+ Null
+ Symbol
+ BigInt
+
+ Objects (Reference Types)
+ Object Literal
+ Arrays
+ Functions
+ ...
+
+ When a 'const' is a reference value, the reference value can be changed, 
+ because the const value (in memory) won't be affected.
+
+ const me = {
+  name: 'joe',
+  age: 41
+ }
+
+
+  ======= CALL STACK ========             ============= HEAP ===============
+identifier    Address   Value             Address             Value
+  me            003       D30F      ->      D30F      { name: 'joe', age: 41}
+
+  The variable is created in the call stack, and it is linked to a address in 
+  the memory. That address references to a address in the HEAP. So, when if I 
+  change the age to '39', I won't be changing the value of the const, wich is 
+  'D30F'
+
+So, if i do:
+const otherPerson = joe
+
+I'm creating a new variable, wich is pointing to the same memory location. 
+Therefore, pointing to the same address in the Heap. That's why if change a 
+property in the variable 'otherPerso' I'll be also changing it in the variable
+'joe'
+
+otherPerson.age = 32 
+By doing that, 'joe.age' will also change to 32.
+  
+'use strict';
+
+let age = 40;
+let oldAge = age;
+age = 41;
+console.log(age);
+console.log(oldAge);
+
+const me = {
+  name: 'joe',
+  age: 41,
+};
+const friend = me;
+friend.age = 27;
+console.log('Friend: ', friend);
+console.log('Me: ', me);
+
+
+
+//Primitives vs Objects in Practice
+'use strict';
+
+//Primitive Types
+let lastName = 'Williams';
+let oldLastName = lastName;
+lastName = 'Davis';
+
+//Reference Types
+console.log(oldLastName);
+console.log(lastName);
+
+const jessica = {
+  firstName: 'Jessica',
+  lastName: 'Williams',
+  age: 27,
+};
+
+const marriedJessica = jessica;
+marriedJessica.lastName = 'Davis';
+
+console.log(`Before Marriage:`, jessica);
+console.log(`Afterr marriage:`, marriedJessica);
+
+const jessica2 = {
+  firstName: 'Jessica',
+  lastName: 'Williams',
+  age: 27,
+  family: ['Alice', 'Bob'],
+};
+
+//This function merges two objects, and then return a new one. But it only
+// works on the first level. If there is an object inside of an object, the
+// the inner object will still point to the 'original' reference. That can be
+// seen in the change that were applied to the 'family' array.
+const jessicaCopy = Object.assign({}, jessica2);
+
+jessicaCopy.lastName = 'Parker';
+
+console.log(`Jessica2: `, jessica2);
+console.log(`Jessica Copy`, jessicaCopy);
+
+jessicaCopy.family.push('Mary');
+jessicaCopy.family.push('John');
+
+console.log(`Jessica2: `, jessica2);
+console.log(`Jessica Copy`, jessicaCopy);
+
+-------------------------------------------------------------------------------
 
 */
