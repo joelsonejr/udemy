@@ -1222,3 +1222,60 @@ console.log(`Jessica Copy`, jessicaCopy);
 -------------------------------------------------------------------------------
 
 */
+
+// 9.103 - Destructuring Arrays
+//Unpack values from Arrays or Objects into separate variables. It means
+//breaking a complex structure into a more simpler one.
+
+'use strict';
+
+const restaurant = {
+  name: 'Classico Italiano',
+  location: 'Via Angelo Tavanti 23, Firenze, Italy',
+  categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
+  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+
+  order: function (starterIndex, mainIndex) {
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+  },
+};
+
+const arr = [2, 3, 5];
+const a = arr[0];
+const b = arr[1];
+const c = arr[2];
+
+//On the left side we have the destructuring assignment.
+const [x, y, z] = arr;
+console.log(x, y, z);
+
+//grab first two elements
+const [first, second] = restaurant.categories;
+//skiping second element
+let [categ1, , categ3] = restaurant.categories;
+console.log(first, second);
+console.log(categ1, categ3);
+//switching values
+[categ1, categ3] = [categ3, categ1];
+console.log(categ1, categ3);
+
+//receive 2 return values from a function
+const [starterCourse, mainCourse] = restaurant.order(2, 0);
+console.log(starterCourse, mainCourse);
+
+//access a nested Array
+const nested = [2, 4, [5, 6]];
+// const [i, , j] = nested;
+// console.log(i, j);
+//destructuring inside destructuring
+const [aa, bb, [cc, dd]] = nested;
+console.log(aa, bb, cc, dd);
+
+//Default values. In case the lenght of the array is unknow.
+//Without default values.
+const [p, q, r] = [8, 9];
+console.log(p, q, r);
+//With default values.
+const [s = 1, e = 1, f = 1] = [8, 9];
+console.log(s, e, f);
