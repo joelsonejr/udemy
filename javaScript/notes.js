@@ -1221,7 +1221,7 @@ console.log(`Jessica Copy`, jessicaCopy);
 
 -------------------------------------------------------------------------------
 
-*/
+
 
 // 9.103 - Destructuring Arrays
 //Unpack values from Arrays or Objects into separate variables. It means
@@ -1279,3 +1279,107 @@ console.log(p, q, r);
 //With default values.
 const [s = 1, e = 1, f = 1] = [8, 9];
 console.log(s, e, f);
+
+-------------------------------------------------------------------------------
+
+*/
+
+// 9.104 - Destructuring Objects
+
+'use strict';
+
+const restaurant = {
+  name: 'Classico Italiano',
+  location: 'Via Angelo Tavanti 23, Firenze, Italy',
+  categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
+  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+  openingHours: {
+    thu: {
+      open: 12,
+      close: 22,
+    },
+    fri: {
+      open: 11,
+      close: 23,
+    },
+    sat: {
+      open: 0, //open 24hs
+      close: 24,
+    },
+  },
+
+  order: function (starterIndex, mainIndex) {
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+  },
+
+  orderDelivery: function ({
+    starterIndex = 1, //setting default values.
+    mainIndex = 0,
+    time = '20:00',
+    address,
+  }) {
+    console.log(
+      `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
+    );
+  },
+};
+
+const myOrder = {
+  time: '22:30',
+  address: 'Via des Solem, 21',
+  mainIndex: 2,
+  starterIndex: 2,
+};
+
+// restaurant.orderDelivery({
+//   time: '22:30',
+//   address: 'Via des Solem, 21',
+//   mainIndex: 2,
+//   starterIndex: 2,
+// });
+
+restaurant.orderDelivery(myOrder);
+
+restaurant.orderDelivery({
+  address: 'Vila do Chaves',
+  starterIndex: 1,
+});
+
+//Destructuring
+const { name, openingHours, categories } = restaurant;
+// console.log(name, openingHours, categories);
+
+//Destructuring and renaming variables
+const {
+  name: restaurantName,
+  openingHours: hours,
+  categories: tags,
+} = restaurant;
+// console.log(restaurantName, hours, tags);
+
+// Destructuring and setting a default value
+const { menu = [], starterMenu: starters = [] } = restaurant;
+// console.log(menu, starters);
+
+//Mutanting Variables
+let a = 111;
+let b = 999;
+const obj = { a: 23, b: 7, c: 14 };
+
+({ a, b } = obj);
+// console.log(a, b);
+
+//Deconstructing nested objects
+// const { fri } = openingHours;
+// console.log(fri);
+// const {
+//   fri: { open, close },
+// } = openingHours;
+// console.log(open, close);
+
+// Deconstructing nested objects, and assigning new variables.
+const {
+  fri: { open: o, close: c },
+} = openingHours;
+// console.log(o, c);
