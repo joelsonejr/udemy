@@ -63,6 +63,7 @@ SECTION 09
   9.105 - Spread Operator
   9.106 - REST Pattern and Parameters
   9.107 - Short Circuiting (&& and ||) 
+  9.108 - The Nullish Coalescing Operator
 */
 
 /*
@@ -1573,7 +1574,7 @@ restaurant.orderPizza('cheese');
 
 ------------------------------------------------------------------------------
 
-*/
+
 
 // 9.107 - Short Circuiting (&& and ||)
 
@@ -1649,3 +1650,47 @@ restaurant.orderPizza && restaurant.orderPizza('musshrooms', 'spinach');
 
 //The AND operataor will retun the first falsy value, or the last value if, they
 //are all truthy.
+
+*/
+
+// 9.108 - The Nullish Coalescing Operator
+'use strict';
+
+const restaurant = {
+  name: 'Classico Italiano',
+  location: 'Via Angelo Tavanti 23, Firenze, Italy',
+  categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
+  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+  openingHours: {
+    thu: {
+      open: 12,
+      close: 22,
+    },
+    fri: {
+      open: 11,
+      close: 23,
+    },
+    sat: {
+      open: 0, //open 24hs
+      close: 24,
+    },
+  },
+  orderPasta: function (ing1, ing2, ing3) {
+    console.log(
+      `Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}`
+    );
+  },
+  orderPizza: function (mainIngredient, ...otherIngridients) {
+    console.log(`mains ingredient ${mainIngredient}`);
+    console.log(otherIngridients);
+  },
+};
+
+restaurant.numGuests = 0;
+const guests = restaurant.numGuests || 10;
+console.log(guests);
+
+//Nullish: null and undefined (NOT 0 or ''). It doesn't see '0' as a falsy value.
+const guestsCorrect = restaurant.numGuests ?? 10;
+console.log(guestsCorrect);
