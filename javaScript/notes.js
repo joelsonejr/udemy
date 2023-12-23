@@ -60,7 +60,9 @@ SECTION 08
 SECTION 09
   9.103 - Destructuring Arrays
   9.104 - Destructuring Objects
-  9.105 Spread Operator
+  9.105 - Spread Operator
+  9.106 - REST Pattern and Parameters
+  9.107 - Short Circuiting (&& and ||) 
 */
 
 /*
@@ -1481,7 +1483,7 @@ restaurantCopy.name = 'Ristorante Roma';
 console.log(restaurant.name);
 console.log(restaurantCopy.name);
 
-*/
+
 
 // 9.106 - Rest Pattern and Parameters
 //The spread operator is used to expand and array into individual elements (unpack an array)
@@ -1568,3 +1570,82 @@ restaurant.orderPizza('cheese');
 
 //The REST pattern is used were we would write VARIABLE NAMES separated by comma.
 //The SPREAD operator is used were we would otherwise write VALUES separated by comma.
+
+------------------------------------------------------------------------------
+
+*/
+
+// 9.107 - Short Circuiting (&& and ||)
+
+//Can use and return ANY data type, and can do short-circuiting
+
+//If the first value it truthy value, it will be immediately returned.
+
+'use strict';
+
+const restaurant = {
+  name: 'Classico Italiano',
+  location: 'Via Angelo Tavanti 23, Firenze, Italy',
+  categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
+  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+  openingHours: {
+    thu: {
+      open: 12,
+      close: 22,
+    },
+    fri: {
+      open: 11,
+      close: 23,
+    },
+    sat: {
+      open: 0, //open 24hs
+      close: 24,
+    },
+  },
+  orderPasta: function (ing1, ing2, ing3) {
+    console.log(
+      `Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}`
+    );
+  },
+  orderPizza: function (mainIngredient, ...otherIngridients) {
+    console.log(`mains ingredient ${mainIngredient}`);
+    console.log(otherIngridients);
+  },
+};
+
+console.log('----- OR --------');
+
+console.log(3 || 'Joe');
+
+console.log('' || 'Joe');
+console.log(true || 0);
+console.log(undefined || null);
+
+console.log(undefined || 0 || '' || 'Hello' || 23 || null);
+
+restaurant.numGuests = 23;
+const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
+console.log(guests1);
+
+const guests2 = restaurant.numGuests || 10;
+console.log(guests2);
+
+console.log('----- AND --------');
+//Works in a opposite way than '||'
+console.log(0 && 'Joe');
+console.log(7 && 'Joe');
+//Returns the first false value
+console.log('Hello' && 23 && null && 'Joe');
+
+if (restaurant.orderPizza) {
+  restaurant.orderPizza('musshrooms', 'spinach');
+}
+//another way of doing it is:
+restaurant.orderPizza && restaurant.orderPizza('musshrooms', 'spinach');
+
+//The OR operator will return the first truthy value of all the operands, or the
+//last value, if they are all falsy.
+
+//The AND operataor will retun the first falsy value, or the last value if, they
+//are all truthy.
