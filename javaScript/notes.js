@@ -1651,7 +1651,7 @@ restaurant.orderPizza && restaurant.orderPizza('musshrooms', 'spinach');
 //The AND operataor will retun the first falsy value, or the last value if, they
 //are all truthy.
 
-*/
+------------------------------------------------------------------------------
 
 // 9.108 - The Nullish Coalescing Operator
 'use strict';
@@ -1694,3 +1694,40 @@ console.log(guests);
 //Nullish: null and undefined (NOT 0 or ''). It doesn't see '0' as a falsy value.
 const guestsCorrect = restaurant.numGuests ?? 10;
 console.log(guestsCorrect);
+
+-------------------------------------------------------------------------------
+
+*/
+
+// 9.109 - Logical Assignment Operators
+const rest1 = {
+  name: 'Capri',
+  // numGuests: 20,
+  numGuests: 0,
+};
+
+const rest2 = {
+  name: 'La Piazza',
+  owner: 'Giovanni',
+};
+
+// rest1.numGuests = rest1.numGuests || 10;
+// rest2.numGuests = rest2.numGuests || 10;
+
+//OR assignment operator - assigns a value to a variable if tha variable is currently falsy
+// rest1.numGuests ||= 10;
+// rest2.numGuests ||= 10;
+
+//Nullish assignment operator - only null or undefined is falsy
+rest1.numGuests ??= 10;
+rest2.numGuests ??= 10;
+
+// rest1.owner = rest1.owner && '<ANONYMUS';
+// rest2.owner = rest2.owner && '<ANONYMUS';
+
+//AND assignment operator - assign a value to a variable that is currently truthy
+rest1.owner &&= '<ANONYMUS';
+rest2.owner &&= '<ANONYMUS';
+
+console.log(rest1);
+console.log(rest2);
