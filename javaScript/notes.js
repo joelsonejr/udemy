@@ -56,6 +56,11 @@ SECTION 08
   8.97 - This Keywork in Practice.
   8.98 - Regular Functions vs Arrow Functions
   8.99 - Primitives vs Objects (Primitive vs Referente Types)
+
+SECTION 09
+  9.103 - Destructuring Arrays
+  9.104 - Destructuring Objects
+  9.105 Spread Operator
 */
 
 /*
@@ -977,6 +982,10 @@ any name.
 
 --------------------------------------------------------------------------------
 
+=============================================================================================
+                                        SECTION 08
+=============================================================================================
+
 // 8.93 Scoping
 
 'use strict';
@@ -1221,7 +1230,9 @@ console.log(`Jessica Copy`, jessicaCopy);
 
 -------------------------------------------------------------------------------
 
-
+=============================================================================================
+                                        SECTION 09
+=============================================================================================
 
 // 9.103 - Destructuring Arrays
 //Unpack values from Arrays or Objects into separate variables. It means
@@ -1282,8 +1293,8 @@ console.log(s, e, f);
 
 -------------------------------------------------------------------------------
 
-*/
 
+   9.103 - Destructuring Arrays
 // 9.104 - Destructuring Objects
 
 'use strict';
@@ -1383,3 +1394,177 @@ const {
   fri: { open: o, close: c },
 } = openingHours;
 // console.log(o, c);
+
+
+
+//9.105 Spread Operator
+
+'use strict';
+
+const arr = [7, 8, 9];
+
+//the spread operator takes all the values from the 'arr' array, and write them
+// individually into the newArray.
+const newArr = [1, 2, ...arr];
+console.log(newArr);
+
+//It works on the same way, when we pass arguments to functions.
+console.log(...newArr);
+
+const restaurant = {
+  name: 'Classico Italiano',
+  location: 'Via Angelo Tavanti 23, Firenze, Italy',
+  categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
+  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+  openingHours: {
+    thu: {
+      open: 12,
+      close: 22,
+    },
+    fri: {
+      open: 11,
+      close: 23,
+    },
+    sat: {
+      open: 0, //open 24hs
+      close: 24,
+    },
+  },
+  orderPasta: function (ing1, ing2, ing3) {
+    console.log(
+      `Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}`
+    );
+  },
+};
+
+const newMenu = [...restaurant.mainMenu, 'Gnocci'];
+console.log(newMenu);
+
+//The spread operator doesn't create new variables (in contrast with destructuring).
+//So, we can only use it in places where we would put values separated by comma.
+
+//spread operator to create shallow copies
+
+const mainMenuCopy = [...restaurant.mainMenu];
+console.log(mainMenuCopy);
+
+//Joining two or more arrays
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+console.log(menu);
+
+//The spread operator works in all iterables (arrays, strings, maps or sets. NOT objects);
+const string = 'Joe';
+const letters = [...string, '', 'E'];
+console.log(letters);
+console.log(string);
+
+//The spread operator can be only used where when creating a new array, or when
+// passing values to a function.
+
+// const ingridients = [
+//   prompt(`Let's make pasta! Ingridient 1?`),
+//   prompt(`Ingridient 2?`),
+//   prompt(`Ingridient 3?`),
+// ];
+
+// restaurant.orderPasta(...ingridients);
+
+//Since ES2018 the spread operator also works on Objects.
+const newRestaurant = { foundingIn: 19198, ...restaurant, founder: 'Giuseppe' };
+console.log(newRestaurant);
+
+//Shallow copy of objects
+
+const restaurantCopy = { ...restaurant };
+restaurantCopy.name = 'Ristorante Roma';
+console.log(restaurant.name);
+console.log(restaurantCopy.name);
+
+*/
+
+// 9.106 - Rest Pattern and Parameters
+//The spread operator is used to expand and array into individual elements (unpack an array)
+//The rest element use the exact same sintax, but collect multiple elements,
+// and condens them into an array (pack elements into an array).
+
+//SPREAD, because on RIGHT side of the assign (=) operator.
+//1) Destructuring
+
+'use strict';
+const restaurant = {
+  name: 'Classico Italiano',
+  location: 'Via Angelo Tavanti 23, Firenze, Italy',
+  categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
+  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+  openingHours: {
+    thu: {
+      open: 12,
+      close: 22,
+    },
+    fri: {
+      open: 11,
+      close: 23,
+    },
+    sat: {
+      open: 0, //open 24hs
+      close: 24,
+    },
+  },
+  orderPasta: function (ing1, ing2, ing3) {
+    console.log(
+      `Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}`
+    );
+  },
+  orderPizza: function (mainIngredient, ...otherIngridients) {
+    console.log(`mains ingredient ${mainIngredient}`);
+    console.log(otherIngridients);
+  },
+};
+
+const arr = [1, 2, ...[3, 4]];
+console.log(arr);
+
+//REST, because on LEFT side of the assign (=) operator.
+const [a, b, ...others] = [1, 2, 3, 4, 5];
+console.log(a);
+console.log(b);
+console.log(others);
+//The rest is collecting the elements, after the last variable,  that were
+// unused in the destructuring assignment. So it doesn't included any skipped
+// elemet. For that reason, the REST paatern must always be the last in the destructuring
+// assignment. Also there should be only one REST into the destructuring assignment.
+
+const [pizza, , risotto, ...otherFood] = [
+  ...restaurant.mainMenu,
+  ...restaurant.starterMenu,
+];
+console.log(pizza, risotto, otherFood);
+
+//Objects
+const { sat, ...weekdays } = restaurant.openingHours;
+console.log(sat);
+console.log(weekdays);
+
+//2) Functions - REST Parameters
+const add = function (...numbers) {
+  let sum = 0;
+  for (let i = 0; i < numbers.length; i++) {
+    sum += numbers[i];
+  }
+  console.log(sum);
+};
+
+add(2, 3);
+add(5, 3, 7, 2);
+add(5, 3, 7, 2, 8, 4, 9);
+
+const x = [23, 5, 7];
+add(...x);
+
+restaurant.orderPizza('mushrooms', 'onion', 'olives', 'spinach');
+restaurant.orderPizza('cheese');
+
+//The REST pattern is used were we would write VARIABLE NAMES separated by comma.
+//The SPREAD operator is used were we would otherwise write VALUES separated by comma.
