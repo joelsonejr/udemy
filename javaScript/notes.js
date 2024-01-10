@@ -1726,8 +1726,8 @@ rest2.numGuests ??= 10;
 // rest2.owner = rest2.owner && '<ANONYMUS';
 
 //AND assignment operator - assign a value to a variable that is currently truthy
-rest1.owner &&= '<ANONYMUS';
-rest2.owner &&= '<ANONYMUS';
+rest1.owner &&= '<ANONYMUS>';
+rest2.owner &&= '<ANONYMUS>';
 
 console.log(rest1);
 console.log(rest2);
