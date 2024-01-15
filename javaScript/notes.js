@@ -1298,7 +1298,7 @@ console.log(s, e, f);
 
 
    9.103 - Destructuring Arrays
-// 9.104 - Destructuring Objects
+// 9.105 - Destructuring Objects
 
 'use strict';
 
@@ -1398,9 +1398,9 @@ const {
 } = openingHours;
 // console.log(o, c);
 
+--------------------------------------------------------------------------------
 
-
-//9.105 Spread Operator
+//9.106 Spread Operator
 
 'use strict';
 
@@ -1484,9 +1484,9 @@ restaurantCopy.name = 'Ristorante Roma';
 console.log(restaurant.name);
 console.log(restaurantCopy.name);
 
+--------------------------------------------------------------------------------------
 
-
-// 9.106 - Rest Pattern and Parameters
+// 9.107 - Rest Pattern and Parameters
 //The spread operator is used to expand and array into individual elements (unpack an array)
 //The rest element use the exact same sintax, but collect multiple elements,
 // and condens them into an array (pack elements into an array).
@@ -1574,15 +1574,45 @@ restaurant.orderPizza('cheese');
 
 ------------------------------------------------------------------------------
 
+// 9.108 - Short Circuiting (&& and ||)
 
-
-// 9.107 - Short Circuiting (&& and ||)
-
-//Can use and return ANY data type, and can do short-circuiting
+//Can use and return ANY data type, and can do short-circuiting (short-circuit evaluation)
 
 //If the first value it truthy value, it will be immediately returned.
 
 'use strict';
+
+console.log('----- OR --------');
+
+console.log('' || 'Joe');
+console.log(true || 0);
+console.log(undefined || null);
+console.log(undefined || 0 || '' || 'Hello' || 23 || null);
+
+The OR operator, quen the first operand is truthy, the other operand won't even be evaluated.
+
+
+console.log('----- AND --------');
+//Works in a opposite way than '||'
+console.log(0 && 'Joe');
+console.log(7 && 'Joe');
+//Returns the first false value
+console.log('Hello' && 23 && null && 'Joe');
+
+The AND operator stops the evaluation when it finds a falsy value, and then returns
+the last value it has read so far. In the case it goes all the way, it returns the last value. 
+
+if (restaurant.orderPizza) {
+  restaurant.orderPizza('musshrooms', 'spinach');
+}
+//another way of doing it is:
+restaurant.orderPizza && restaurant.orderPizza('musshrooms', 'spinach');
+
+//The OR operator will return the first truthy value of all the operands, or the
+//last value, if they are all falsy.
+
+//The AND operataor will retun the first falsy value, or the last value if, they
+//are all truthy.
 
 const restaurant = {
   name: 'Classico Italiano',
@@ -1615,15 +1645,9 @@ const restaurant = {
   },
 };
 
-console.log('----- OR --------');
 
-console.log(3 || 'Joe');
-
-console.log('' || 'Joe');
-console.log(true || 0);
-console.log(undefined || null);
-
-console.log(undefined || 0 || '' || 'Hello' || 23 || null);
+const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
+console.log(guests1);
 
 restaurant.numGuests = 23;
 const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
@@ -1632,28 +1656,12 @@ console.log(guests1);
 const guests2 = restaurant.numGuests || 10;
 console.log(guests2);
 
-console.log('----- AND --------');
-//Works in a opposite way than '||'
-console.log(0 && 'Joe');
-console.log(7 && 'Joe');
-//Returns the first false value
-console.log('Hello' && 23 && null && 'Joe');
 
-if (restaurant.orderPizza) {
-  restaurant.orderPizza('musshrooms', 'spinach');
-}
-//another way of doing it is:
-restaurant.orderPizza && restaurant.orderPizza('musshrooms', 'spinach');
 
-//The OR operator will return the first truthy value of all the operands, or the
-//last value, if they are all falsy.
-
-//The AND operataor will retun the first falsy value, or the last value if, they
-//are all truthy.
 
 ------------------------------------------------------------------------------
 
-// 9.108 - The Nullish Coalescing Operator
+// 9.109 - The Nullish Coalescing Operator
 'use strict';
 
 const restaurant = {
@@ -1699,7 +1707,7 @@ console.log(guestsCorrect);
 
 */
 
-// 9.109 - Logical Assignment Operators
+// 9.110 - Logical Assignment Operators
 const rest1 = {
   name: 'Capri',
   // numGuests: 20,
@@ -1729,5 +1737,48 @@ rest2.numGuests ??= 10;
 rest1.owner &&= '<ANONYMUS>';
 rest2.owner &&= '<ANONYMUS>';
 
-console.log(rest1);
-console.log(rest2);
+// console.log(rest1);
+// console.log(rest2);
+
+const restaurant = {
+  name: 'Classico Italiano',
+  location: 'Via Angelo Tavanti 23, Firenze, Italy',
+  categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
+  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+  openingHours: {
+    thu: {
+      open: 12,
+      close: 22,
+    },
+    fri: {
+      open: 11,
+      close: 23,
+    },
+    sat: {
+      open: 0, //open 24hs
+      close: 24,
+    },
+    potato: {
+      open: 50, //open 24hs
+      close: 783,
+    },
+  },
+  orderPasta: function (ing1, ing2, ing3) {
+    console.log(
+      `Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}`
+    );
+  },
+  orderPizza: function (mainIngredient, ...otherIngridients) {
+    console.log(`mains ingredient ${mainIngredient}`);
+    console.log(otherIngridients);
+  },
+};
+
+// const { potatu, ...weekdays } = restaurant.openingHours;
+// console.log(potatu);
+// console.log(weekdays);
+const [first, second, ...rest] = [1, 2, 3, 4, 5, 6];
+console.log(first);
+console.log(second);
+console.log(rest);
