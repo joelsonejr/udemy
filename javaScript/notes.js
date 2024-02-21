@@ -1662,6 +1662,13 @@ console.log(guests2);
 ------------------------------------------------------------------------------
 
 // 9.109 - The Nullish Coalescing Operator
+
+// This operator works withe the idea of nullish values, instead of falsy values 
+Nullish values: null and undefined. It doesn't include 0 or '' (empty string). 
+
+const guestsCorrect = restaurant.numGuests ?? 10;
+console.log(guestsCorrect);
+
 'use strict';
 
 const restaurant = {
@@ -1699,9 +1706,7 @@ restaurant.numGuests = 0;
 const guests = restaurant.numGuests || 10;
 console.log(guests);
 
-//Nullish: null and undefined (NOT 0 or ''). It doesn't see '0' as a falsy value.
-const guestsCorrect = restaurant.numGuests ?? 10;
-console.log(guestsCorrect);
+
 
 -------------------------------------------------------------------------------
 
@@ -1729,6 +1734,7 @@ const rest2 = {
 //Nullish assignment operator - only null or undefined is falsy
 rest1.numGuests ??= 10;
 rest2.numGuests ??= 10;
+//Will assign a value to a variable if that variable is currently nullish.
 
 // rest1.owner = rest1.owner && '<ANONYMUS';
 // rest2.owner = rest2.owner && '<ANONYMUS';
