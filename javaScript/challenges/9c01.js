@@ -41,6 +41,8 @@ const game = {
   },
 };
 
+/* //My Solution
+
 // 1.
 const [player1, player2] = [...game.players];
 
@@ -67,3 +69,44 @@ const allPlayers = [...player1, ...player2];
 //4.
 const players1Final = [...player1, 'Thiago', 'Coutinho', 'Perisic'];
 console.log(players1Final);
+
+const [firstOdd, drawOdd, ...secondOdd] = { ...game.odds };
+console.log(firstOdd);
+console.log(drawOdd);
+console.log(secondOdd);
+
+console.log({ ...game.odds });
+
+const printGoals = function () {
+  console.log;
+}; */
+
+//Solution
+
+//1
+const [players1, players2] = [...game.players];
+
+//2
+const [gk, ...fieldPlayers] = players1;
+
+//3
+const allPlayer = [...players1, ...players2];
+
+//4
+const players1Final = [...players1, 'Thiago', 'Coutinho', 'Perisisc'];
+
+//5
+const {
+  odds: { team1, x: draw, team2 },
+} = game;
+
+//6
+const printGoals = function (...players) {
+  console.log(`${players.length} goals were scored`);
+};
+
+printGoals(...game.scored);
+
+//7
+team1 < team2 && console.log(`Teams 1 is more likely to win.`);
+team1 > team2 && console.log(`Teams 2 is more likely to win.`);
