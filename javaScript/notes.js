@@ -1712,7 +1712,7 @@ console.log(guests);
 
 */
 
-// 9.110 - Logical Assignment Operators
+/* // 9.110 - Logical Assignment Operators
 const rest1 = {
   name: 'Capri',
   // numGuests: 20,
@@ -1787,4 +1787,60 @@ const restaurant = {
 const [first, second, ...rest] = [1, 2, 3, 4, 5, 6];
 console.log(first);
 console.log(second);
-console.log(rest);
+console.log(rest); 
+
+
+-------------------------------------------------------------------------------
+
+*/
+
+// 9.111 - Looping Arrays: the for-of loop
+
+const restaurant = {
+  name: 'Classico Italiano',
+  location: 'Via Angelo Tavanti 23, Firenze, Italy',
+  categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
+  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+  openingHours: {
+    thu: {
+      open: 12,
+      close: 22,
+    },
+    fri: {
+      open: 11,
+      close: 23,
+    },
+    sat: {
+      open: 0, //open 24hs
+      close: 24,
+    },
+    potato: {
+      open: 50, //open 24hs
+      close: 783,
+    },
+  },
+  orderPasta: function (ing1, ing2, ing3) {
+    console.log(
+      `Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}`
+    );
+  },
+  orderPizza: function (mainIngredient, ...otherIngridients) {
+    console.log(`mains ingredient ${mainIngredient}`);
+    console.log(otherIngridients);
+  },
+};
+
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+
+for (const item of menu) console.log(item);
+
+//Itens and indexes
+for (const item of menu.entries()) {
+  console.log(`${item[0] + 1}: ${item[1]}`);
+}
+
+//same goal, using destructuring
+for (const [item, element] of menu.entries()) {
+  console.log(`${item + 1}: ${element}`);
+}
