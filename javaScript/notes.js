@@ -1967,3 +1967,105 @@ const restaurant = {
 ------------------------------------------------------------------
 */
 //9.114-l.1964 - Optional Chaining (?.)
+
+'use strict';
+const weekdays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
+const openingHours = {
+  [weekdays[3]]: {
+    open: 12,
+    close: 22,
+  },
+  [weekdays[4]]: {
+    open: 11,
+    close: 23,
+  },
+  [weekdays[5]]: {
+    open: 0, //open 24hs
+    close: 24,
+  },
+};
+
+const restaurant = {
+  name: 'Classico Italiano',
+  location: 'Via Angelo Tavanti 23, Firenze, Italy',
+  categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
+  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+
+  openingHours,
+
+  order(starterIndex, mainIndex) {
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+  },
+
+  orderPasta(ing1, ing2, ing3) {
+    console.log(
+      `Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}`
+    );
+  },
+  orderPizza(mainIngredient, ...otherIngridients) {
+    console.log(`mains ingredient ${mainIngredient}`);
+    console.log(otherIngridients);
+  },
+};
+
+//The 'mon' propertie does not exist, so it returns a error message
+/* console.log(restaurant.openingHours.mon.open); */
+
+//To avoid this, one can check if the property exists, before printing it's value:
+/* if (restaurant.openingHours && restaurant.openingHours.mon)
+  console.log(restaurant.openingHours.mon.open); */
+
+//There's a easyer way of doing it, using Optional Chaining
+//'?' is the optional chaining operator
+//only if the property before the question mark exists, the property 'open' will
+//be read. Otherwise, 'undefined' will be returned.
+/* console.log(restaurant.openingHours.mon?.open); */
+
+//It can also be used to perform more verifications
+/* console.log(restaurant.openingHours?.fri?.open); */
+
+//Another example
+const days = ['mon', 'tue', 'wed', 'thu', 'fry', 'sat', 'sun'];
+
+for (const day of days) {
+  const open = restaurant.openingHours[day]?.open ?? 'closed';
+
+  console.log(`On ${day}, we open at ${open}`);
+}
+/*The nullish coalescing operator is to make sure that when the value of 'open'
+is '0', it won't be interpreted as undefined. */
+
+//My approuch
+for (const day of weekdays) {
+  restaurant.openingHours?.[day] === undefined &&
+    console.log(`The restaurant doesn't open on ${day}.`);
+
+  restaurant.openingHours?.[day] !== undefined &&
+    console.log(
+      `On ${day} the restaurant opens at ${restaurant.openingHours?.[day]?.open}.`
+    );
+}
+
+//Optional Chaining on methods
+console.log(restaurant.order?.(0, 1) ?? 'Method does not exist');
+
+/* In the above code, the following steps happen:
+1. The optional chaining verify if the method exists.
+2. If it does, it then calls the method, using the given parameters.
+3. In case it doesn't, the nullish coalescing operator provides a default message,
+as we can see below */
+
+console.log(restaurant.orderIceCream?.(0, 1) ?? 'Method does not exist');
+
+//Optional Chaining on arrays
+const users = [
+  {
+    name: 'Quenia',
+    email: 'quenia@scientist.com',
+  },
+];
+
+console.log(users[0]?.name ?? 'User not found');
+console.log(users[13]?.name ?? 'User not found');
