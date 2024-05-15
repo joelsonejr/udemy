@@ -64,6 +64,11 @@ SECTION 09
   9.106 - REST Pattern and Parameters
   9.107 - Short Circuiting (&& and ||) 
   9.108 - The Nullish Coalescing Operator
+  9.109 - The Nullish Coalescing Operator
+  9.110 - Logical Assignment Operators
+  9.112 -Looping Arrays: the for-of loop
+  9.113 - Enhanced Object Literals
+  9.114 - Optional Chaining (?.)
 */
 
 /*
@@ -1589,7 +1594,7 @@ console.log(true || 0);
 console.log(undefined || null);
 console.log(undefined || 0 || '' || 'Hello' || 23 || null);
 
-The OR operator, quen the first operand is truthy, the other operand won't even be evaluated.
+The OR operator, when the first operand is truthy, the other operand won't even be evaluated.
 
 
 console.log('----- AND --------');
@@ -1663,7 +1668,7 @@ console.log(guests2);
 
 // 9.109 - The Nullish Coalescing Operator
 
-// This operator works withe the idea of nullish values, instead of falsy values 
+// This operator works with the idea of nullish values, instead of falsy values 
 Nullish values: null and undefined. It doesn't include 0 or '' (empty string). 
 
 const guestsCorrect = restaurant.numGuests ?? 10;
@@ -1790,11 +1795,10 @@ console.log(second);
 console.log(rest); 
 
 
--------------------------------------------------------------------------------
+---------------------------------------------------------------
 
-*/
 
-// 9.111 - Looping Arrays: the for-of loop
+// 9.112 - Looping Arrays: the for-of loop
 
 const restaurant = {
   name: 'Classico Italiano',
@@ -1844,3 +1848,122 @@ for (const item of menu.entries()) {
 for (const [item, element] of menu.entries()) {
   console.log(`${item + 1}: ${element}`);
 }
+
+-------------------------------------------------------------------------------
+
+
+
+// 9.113 - Enhanced Object Literals
+'use strict';
+
+//In ES6 we can compute property names, instead of write them manually.
+
+
+//OlderWay
+/* const openingHours = {
+  thu: {
+    open: 12,
+    close: 22,
+  },
+  fri: {
+    open: 11,
+    close: 23,
+  },
+  sat: {
+    open: 0, //open 24hs
+    close: 24,
+  },
+  potato: {
+    open: 50, //open 24hs
+    close: 783,
+  },
+}; 
+
+//ES6 way
+const weekdays = ['mon', 'tue', 'wed', 'thu', 'fry', 'sat', 'sun'];
+
+const openingHours = {
+  //between the brackets goes the calculation.
+  [weekdays[3]]: {
+    open: 12,
+    close: 22,
+  },
+  [weekdays[4]]: {
+    open: 11,
+    close: 23,
+  },
+  // podem ser utilizados vários tipos de computation, para preencher os valores.
+  [`day-${2 + 4}`]: {
+    open: 0, //open 24hs
+    close: 24,
+  },
+  potato: {
+    open: 50, //open 24hs
+    close: 783,
+  },
+};
+
+const restaurant = {
+  name: 'Classico Italiano',
+  location: 'Via Angelo Tavanti 23, Firenze, Italy',
+  categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
+  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+
+  //ES6 enhanced object literals. Now the name of the object can be provided only
+  //once, and thats is enough for it to make parte of the restarurant object
+  // in older versions of EC, it must be done in the form of
+  //openingHours : openingHours
+
+  openingHours,
+
+  //In ES6: it's not necessary to create a property, and then set it to a function
+  // expression, in order to declare a method.
+
+  //Old method
+  /*   order: function (starterIndex, mainIndex) {
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+  },
+
+  orderDelivery: function ({
+    starterIndex = 1, //setting default values.
+    mainIndex = 0,
+    time = '20:00',
+    address,
+  }) {
+    console.log(
+      `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
+    );
+  }, 
+
+  //ES6 way will work the same as before, but with an easier sintax.
+  order(starterIndex, mainIndex) {
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+  },
+
+  orderDelivery({
+    starterIndex = 1, //setting default values.
+    mainIndex = 0,
+    time = '20:00',
+    address,
+  }) {
+    console.log(
+      `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
+    );
+  },
+
+  orderPasta(ing1, ing2, ing3) {
+    console.log(
+      `Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}`
+    );
+  },
+  orderPizza(mainIngredient, ...otherIngridients) {
+    console.log(`mains ingredient ${mainIngredient}`);
+    console.log(otherIngridients);
+  },
+};
+
+
+------------------------------------------------------------------
+*/
+//9.114-l.1964 - Optional Chaining (?.)
