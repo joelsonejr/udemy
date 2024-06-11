@@ -1,5 +1,3 @@
-'use strict';
-
 /*
 =============================================================================================
                                         SUMMARY
@@ -72,6 +70,7 @@ SECTION 09
   9.113 - Enhanced Object Literals
   9.114 - Optional Chaining (?.)
   9.115 - Looping Objects Keys, Values, and Entries
+  9.117 - Sets
 
 
 
@@ -79,10 +78,42 @@ SECTION 09
                                         SECTION 09
 =============================================================================================
 
+//9.117 - Sets
 
+//Set are not used to replace Arrays.
+//The elements of a set are unique. It ignores all duplicate values.
+//Values of a set cannot be retrieved. It's bacisally used to determine if a
+// value is or not in a set.
 
+'use strict';
 
-=============================================================================================
+const orders = ['Pasta', 'Pizza', 'Pizza', 'Risotto', 'Pasta', 'Pizza'];
+
+const orderSet = new Set(orders);
+console.log(orderSet);
+console.log(new Set('Joelson'));
+
+console.log(orderSet.size);
+console.log(orderSet.has('Pizza'));
+console.log(orderSet.has('Strawberry'));
+orderSet.add('Garlic Bread');
+orderSet.add('Garlic Bread');
+orderSet.delete('Risotto');
+// orderSet.clear();
+console.log(orderSet);
+for (const order of orderSet) console.log(order);
+
+//Example
+const staff = ['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter'];
+let staffUnique = new Set(staff);
+console.log(`This is a set: `);
+console.log(staffUnique);
+//Converting from Set to an Array, using the spread operator.
+staffUnique = [...new Set(staff)];
+console.log(`Set converted into an array:`);
+console.log(staffUnique);
+
+///////////////////////////////////////////////////////////////////////////////
 
 //9.115 - Looping Objects Keys, Values, and Entries
 
