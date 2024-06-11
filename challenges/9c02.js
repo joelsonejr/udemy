@@ -50,6 +50,10 @@ for (const player of players) {
   i++;
 }
 
+//Teacher-01
+for (const [i, player] of game.scored.entries())
+  console.log(`Goals ${i + 1}: ${player}`);
+
 //2
 console.log();
 const odds = Object.values(game.odds);
@@ -68,6 +72,13 @@ const calculateOddsAverage = () => {
 
 console.log(`Odds average = ${calculateOddsAverage()}`);
 
+//Teacher-02
+const todds = Object.values(game.odds);
+let average = 0;
+for (const odd of todds) average += odd;
+average /= todds.length;
+console.log(average);
+
 //3
 console.log();
 const [teamOneName, teamOneOdds] = [game.team1, game.odds.team1];
@@ -78,23 +89,20 @@ console.log(`Odd of victory ${teamOneName}: ${teamOneOdds} `);
 console.log(`Odd of draw: ${oddsDraw}`);
 console.log(`Odd of victory ${teamTwoName}: ${teamTwoOdds} `);
 
+//Teacher-03
+for (const [team, odd] of Object.entries(game.odds)) {
+  const teamStr = team === 'x' ? 'draw' : `victory ${game[team]}`;
+  console.log(`Odd of ${teamStr} ${odd}`);
+}
+
 //4 TODO: finish
-class Player {
-  constructor(name, goals) {
-    (this.name = name), (this.goals = goals);
-  }
+
+const goalers = Object.values(game.scored);
+
+const scorers = {};
+
+for (const goaler of goalers) {
+  scorers[goaler] = scorers[goaler] ? scorers[goaler] + 1 : 1;
 }
 
-let gameScores = {};
-
-const playersList = Object.values(game.scored);
-
-for (let player in playersList) {
-  if (!Object.values(gameScores).includes(player)) {
-    gameScores += player = new Player(player, 1);
-  }
-}
-
-console.log();
-console.log(gameScores);
-console.log(playersList);
+console.log(scorers);
