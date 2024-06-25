@@ -1,3 +1,37 @@
+// 9.118 - Maps: Fundamentals
+'use strict';
+
+const restaurant = new Map();
+
+restaurant.set('name', 'Classico Italiano'); //(key, value)
+restaurant.set(1, 'Firenze, Italy');
+console.log(restaurant.set(2, 'Lisbon, Portugal')); // The .set updates the map and returns the updated map.
+
+restaurant
+  .set('categories', ['Italian', 'Pizzeria', 'Vegeterian', 'Organic'])
+  .set('open', 11)
+  .set('close', 23)
+  .set(true, 'We are open')
+  .set(false, 'We are closed');
+
+console.log(restaurant.get('name'));
+console.log(restaurant.get(true));
+
+const time = 21;
+console.log(
+  restaurant.get(
+    time > restaurant.get('open') && time < restaurant.get('close')
+  )
+);
+
+console.log(restaurant.has('categories'));
+
+restaurant.delete(2);
+console.log(restaurant);
+console.log(restaurant.size);
+restaurant.clear();
+console.log(restaurant.size);
+
 /*
 =============================================================================================
                                         SUMMARY
@@ -71,6 +105,7 @@ SECTION 09
   9.114 - Optional Chaining (?.)
   9.115 - Looping Objects Keys, Values, and Entries
   9.117 - Sets
+  9.118 - Maps: Fundamentals
 
 
 
