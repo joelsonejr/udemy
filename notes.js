@@ -1,36 +1,5 @@
-// 9.118 - Maps: Fundamentals
+//9.122 - Working With Strings - Part 1
 'use strict';
-
-const restaurant = new Map();
-
-restaurant.set('name', 'Classico Italiano'); //(key, value)
-restaurant.set(1, 'Firenze, Italy');
-console.log(restaurant.set(2, 'Lisbon, Portugal')); // The .set updates the map and returns the updated map.
-
-restaurant
-  .set('categories', ['Italian', 'Pizzeria', 'Vegeterian', 'Organic'])
-  .set('open', 11)
-  .set('close', 23)
-  .set(true, 'We are open')
-  .set(false, 'We are closed');
-
-console.log(restaurant.get('name'));
-console.log(restaurant.get(true));
-
-const time = 21;
-console.log(
-  restaurant.get(
-    time > restaurant.get('open') && time < restaurant.get('close')
-  )
-);
-
-console.log(restaurant.has('categories'));
-
-restaurant.delete(2);
-console.log(restaurant);
-console.log(restaurant.size);
-restaurant.clear();
-console.log(restaurant.size);
 
 /*
 =============================================================================================
@@ -106,12 +75,147 @@ SECTION 09
   9.115 - Looping Objects Keys, Values, and Entries
   9.117 - Sets
   9.118 - Maps: Fundamentals
+  9.119 - Maps: Iteration
+  9.120 - Summary: Which Data Structure to Use?
+  9.122 - Working With Strings - Part 1
 
 
 
 =============================================================================================
                                         SECTION 09
 =============================================================================================
+
+//9.120 - Summary: Which Data Structure to Use?
+# Arrays vs Sets
+## Arrays
+  - Provide an ordered list of values
+  - Use when data manipulation is needed.
+## Sets
+  - Use when unique (no duplicate) values are needed.
+  - Use when high performance is of the essesnce.
+# Objects vc Maps
+## Objects
+  - Use when the inclusion of methods is necessary
+  - Use when working with JSON.
+## Maps
+  - Use when you simply need to map key to values
+  - Use when you need keys that are not strings
+
+////////////////////////////////////////////////////////////////////////////////////////////
+
+//  9.119 - Maps: Iteration
+'use strict';
+
+const weekdays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
+const openingHours = {
+  [weekdays[3]]: {
+    open: 12,
+    close: 22,
+  },
+  [weekdays[4]]: {
+    open: 11,
+    close: 23,
+  },
+  [weekdays[5]]: {
+    open: 0, //open 24hs
+    close: 24,
+  },
+};
+
+// Another way of populate a Map, without using .set
+const question = new Map([
+  ['question', 'Which programming language:'],
+  [1, 'C'],
+  [2, 'Java'],
+  [3, 'JavaScript'],
+  ['correct', 3],
+  [true, 'Correct'],
+  [false, 'Try again'],
+]);
+
+console.log(question);
+
+// Convert object to map
+// The structure of Object.entries (an array of arrays) is very similar to the
+// approach showed above.
+console.log(Object.entries(openingHours));
+// It means that there's a easy way of creating a Map from an Object.
+const hoursMap = new Map(Object.entries(openingHours));
+console.log(hoursMap);
+
+//Iteration over a Map
+//Destructuring will be used to recover the pair kee/ value from the map.
+//Works in a similar way as iterating over an Object. The only difference is that
+// in the place of "question" (name of the Map) we would use "Object.entries"
+for (const [key, value] of question) {
+  // in this example, only the answers will be printed
+  if (typeof key === 'number') {
+    console.log(`Answer ${key}: ${value}`);
+  }
+}
+
+//QuizApp
+console.log();
+console.log(question.get('question'));
+for (const [key, value] of question) {
+  // in this example, only the answers will be printed
+  if (typeof key === 'number') {
+    console.log(`Answer ${key}: ${value}`);
+  }
+}
+
+const fakeInput = 2;
+const result = question.get('correct') === fakeInput;
+
+console.log(question.get(result));
+
+//Convert Map to array
+//Just use the spread operator to unpack the Map into and array.
+console.log([...question]);
+//The resulting array has the same effect of [...question.entries]
+
+//The "keys" and "values" properties can also be used in Maps.
+console.log([...question.keys()]);
+console.log([...question.values()]);
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+// 9.118 - Maps: Fundamentals
+'use strict';
+
+const restaurant = new Map();
+
+restaurant.set('name', 'Classico Italiano'); //(key, value)
+restaurant.set(1, 'Firenze, Italy');
+console.log(restaurant.set(2, 'Lisbon, Portugal')); // The .set updates the map and returns the updated map.
+
+restaurant
+  .set('categories', ['Italian', 'Pizzeria', 'Vegeterian', 'Organic'])
+  .set('open', 11)
+  .set('close', 23)
+  .set(true, 'We are open')
+  .set(false, 'We are closed');
+
+console.log(restaurant.get('name'));
+console.log(restaurant.get(true));
+
+const time = 21;
+console.log(
+  restaurant.get(
+    time > restaurant.get('open') && time < restaurant.get('close')
+  )
+);
+
+console.log(restaurant.has('categories'));
+
+restaurant.delete(2);
+console.log(restaurant);
+console.log(restaurant.size);
+restaurant.clear();
+console.log(restaurant.size);
+
+/////////////////////////////////////////////////////////////////////////////////////////////
 
 //9.117 - Sets
 
@@ -148,6 +252,7 @@ staffUnique = [...new Set(staff)];
 console.log(`Set converted into an array:`);
 console.log(staffUnique);
 
+///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
 //9.115 - Looping Objects Keys, Values, and Entries
